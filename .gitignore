@@ -12,6 +12,7 @@
 /.idea
 .project
 .classpath
+.phpintel
 .c9/
 *.launch
 .settings/

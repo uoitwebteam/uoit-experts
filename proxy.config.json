@@ -1,0 +1,9 @@
+{
+	"/api/*": {
+		"target": "https://public-api.expertfile.com",
+		"changeOrigin": true,
+		"pathRewrite": {"^/api" : ""},
+		"secure": true,
+		"logLevel": "debug"
+	}
+}

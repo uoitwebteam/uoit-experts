@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.config.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -42,5 +42,22 @@
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.2.0"
-  }
+  },
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.2.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wosevision/uoit-experts.git"
+  },
+  "keywords": [
+    "uoit",
+    "directory",
+    "angular",
+    "angularjs",
+    "rxjs"
+  ],
+  "author": "Jackson Teather <jackson.teather@uoit.ca>",
+  "bugs": {
+    "url": "https://github.com/wosevision/uoit-experts/issues"
+  },
+  "homepage": "https://github.com/wosevision/uoit-experts#readme"
 }
