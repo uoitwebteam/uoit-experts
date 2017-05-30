@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 import { ExpertsService } from './experts/experts.service';
 
+import { Industry, Expert, SearchQuery } from './models';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,29 +17,30 @@ export class AppComponent {
   experts = null;
   expert = null;
 
-  constructor(private expertsService: ExpertsService) { this.getIndustries(); this.getExperts(); }
-
-  getIndustries() {
-  	this.expertsService.getIndustries()
-				.subscribe(
-					filters => this.filters = filters,
-					error =>  this.errorMessage = <any>error
-				);
+  constructor(private expertsService: ExpertsService) {
+  	// this.getIndustries();
+  	// this.getExperts();
   }
 
-  getExperts() {
-  	this.expertsService.getExperts()
-				.subscribe(
-					experts => this.experts = experts,
-					error =>  this.errorMessage = <any>error
-				);
-  }
+  // getIndustries() {
+  // 	this.expertsService.getIndustries()
+		// 		.subscribe(
+		// 			filters => {
+		// 				console.log('Filters returned:', filters);
+		// 				this.filters = <Industry[]>filters
+		// 			},
+		// 			error =>  this.errorMessage = <any>error
+		// 		);
+  // }
 
-  getExpert(id) {
-  	this.expertsService.getExpert(id)
-				.subscribe(
-					expert => this.expert = expert,
-					error =>  this.errorMessage = <any>error
-				);
-  }
+  // getExperts() {
+  // 	this.expertsService.getExperts()
+		// 		.subscribe(
+		// 			experts => {
+		// 				console.log('Experts returned:', experts);
+		// 				this.experts = <Expert[]>experts
+		// 			},
+		// 			error =>  this.errorMessage = <any>error
+		// 		);
+  // }
 }

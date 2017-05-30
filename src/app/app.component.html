@@ -1,15 +1,10 @@
 <h1>
   {{title}}
 </h1>
-<h2 *ngIf="errorMessage" style="color:red;">ERROR: {{ errorMessage?.message }}</h2>
-<div *ngIf="expert">
-	<img [src]="expert.avatar.c.url" [height]="expert.avatar.c.height" [width]="expert.avatar.c.width">
-</div>
-<ul>
-  <li *ngFor="let expert of experts">
-    <a href="javascript:;" (click)="getExpert(expert.username)">{{ expert.firstname }} {{ expert.lastname }}</a>
-  </li>
-</ul>
+<h2 *ngIf="errorMessage" style="color:red;">ERROR: {{ errorMessage }}</h2>
+
+<expert-list></expert-list>
+
 <ul>
   <li *ngFor="let filter of filters">
     {{ filter.id }}: {{ filter.name }} <strong>({{ filter.count }})</strong>

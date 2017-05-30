@@ -1,0 +1,9 @@
+<p>
+  list works!
+</p>
+<expert-profile *ngIf="expert" [expert]="expert"></expert-profile>
+<ul>
+	<li *ngFor="let expert of experts">
+	  <expert-list-item [expert]="expert" (onShowDetail)="onShowDetail($event)"></expert-list-item>
+  </li>
+</ul>
