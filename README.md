@@ -1,26 +1,49 @@
-# UoitExperts
+# UOIT Experts
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.2.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+For a dev server, run one of the following:
+
+- `yarn start`
+- `ng serve`
+- `npm run start`
+
+Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+To [generate a new component](https://github.com/angular/angular-cli/wiki/generate-component), run one of the following: 
+
+- `yarn component -- component-name`
+- `ng generate component component-name`
+- `npm run component -- component-name`
+
+You can also use `ng generate directive|pipe|service|class|module` for other component types.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build, or alternatively, use the `yarn build`/`npm run build` script (which includes it by default).
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run one of:
+
+- `yarn test`
+- `ng test`
+- `npm run test`
+
+&hellip;to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Run one of:
+- `yarn e2e`
+- `ng e2e`
+- `npm run e2e`
+
+&hellip;to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 Before running the tests make sure you are serving the app via `ng serve`.
 
 ## Further help
