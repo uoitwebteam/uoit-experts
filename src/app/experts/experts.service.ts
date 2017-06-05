@@ -41,7 +41,7 @@ export class ExpertsService {
   	return this.getAccessToken()
 			.flatMap((options: RequestOptions) => {
 		  	const search = new SearchQuery({
-		  		fields: 'user:username,user:firstname,user:lastname,user:job_title,tagline,avatar:l:url'
+		  		fields: 'user:username,user:firstname,user:lastname,user:job_title,tagline,user:location:city,avatar:l:url,user:location:state,user:location:country,engagement:topics'
 		  	});
 		    for (var key in search) {
 					options.params.set(key, search[key]);
@@ -95,6 +95,7 @@ export class ExpertsService {
   }
 
   private extractAccessToken (data: any): RequestOptions {
+    console.log('Access token retrieved:', data.authorization);
   	const params = new URLSearchParams();
     for (var key in data.authorization) {
 			params.set(key, data.authorization[key]);

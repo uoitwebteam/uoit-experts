@@ -9,7 +9,7 @@ const queryDefault = {
 	fee_max: '',
 	sort: '',
 	page_number: 1,
-	page_size: 9999,
+	page_size: 1000,
 	keyword: ''
 };
 
@@ -27,19 +27,35 @@ export class Industry {
 }
 
 export class Expert {
-  constructor(expert: {
-  	username: string,
-  	firstname: string,
-  	lastname: string,
-  	job_title: string,
-  	tagline: string,
-  	topics: Topic[],
-  	country: string,
-  	state: string,
-  	city: string,
-  	url: string,
-  }) {
-  	Object.assign(this, expert);
+	public username: string;
+	public firstname: string;
+	public lastname: string;
+	public job_title: string;
+	public tagline: string;
+	public topics: Topic[];
+	public country: string;
+	public state: string;
+	public city: string;
+	public url: string;
+
+  constructor(expert: any) {
+  	const {
+	  	username, firstname, lastname,
+	  	job_title, tagline, topics,
+	  	country, state, city,
+	  	url
+	  } = expert;
+
+  	Object.assign(this, {
+  		username, firstname, lastname,
+	  	job_title, tagline, topics,
+	  	country, state, city,
+	  	url
+	  });
+  }
+
+  get fullname() {
+  	return [this.firstname, this.lastname].join(' ');
   }
 }
 
