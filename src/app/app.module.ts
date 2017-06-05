@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { NgPipesModule } from 'ngx-pipes';
+
 import { AppComponent } from './app.component';
 import { ExpertsService } from './experts/experts.service';
 import { ProfileComponent } from './profile/profile.component';
@@ -19,7 +21,8 @@ import { ItemComponent } from './list/item/item.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    NgPipesModule
   ],
   providers: [
   	ExpertsService
