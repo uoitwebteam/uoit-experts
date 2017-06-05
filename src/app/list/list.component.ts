@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ExpertsService } from '../experts/experts.service';
+import 'rxjs/add/operator/retry';
 
+import { ExpertsService } from '../experts/experts.service';
 import { Industry, Expert } from '../models';
 
 @Component({
@@ -10,11 +11,10 @@ import { Industry, Expert } from '../models';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  errorMessage = null;
 
-  filters = null;
-  experts = null;
-  expert = null;
+	experts: Expert[];
+	expert: Expert;
+  errorMessage;
 
   constructor(private expertsService: ExpertsService) { }
 
@@ -22,13 +22,14 @@ export class ListComponent implements OnInit {
   	this.getExperts();
   }
 
-  onShowDetail(expertId) {
-  	console.log('Expert detail opened for: ', expertId);
-  	this.getExpert(expertId);
+  onShowDetail(expert) {
+  	console.log('Expert detail opened for: ', expert.username);
+  	this.getExpert(expert);
   }
 
   getExperts() {
   	this.expertsService.getExperts()
+		  	.retry(5)
 				.subscribe(
 					experts => {
 						console.log('Experts returned:', experts);
@@ -38,12 +39,13 @@ export class ListComponent implements OnInit {
 				);
   }
 
-  getExpert(expertId) {
-  	this.expertsService.getExpert(expertId)
+  getExpert(expert) {
+  	this.expertsService.getExpert(expert.username)
+		  	.retry(5)
 				.subscribe(
 					expert => {
 						console.log('Expert returned:', expert);
-						this.expert = <Expert>expert
+						this.expert = expert;
 					},
 					error =>  this.errorMessage = <any>error
 				);

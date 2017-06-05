@@ -18,29 +18,17 @@ export class AppComponent {
   expert = null;
 
   constructor(private expertsService: ExpertsService) {
-  	// this.getIndustries();
-  	// this.getExperts();
+  	this.getIndustries();
   }
 
-  // getIndustries() {
-  // 	this.expertsService.getIndustries()
-		// 		.subscribe(
-		// 			filters => {
-		// 				console.log('Filters returned:', filters);
-		// 				this.filters = <Industry[]>filters
-		// 			},
-		// 			error =>  this.errorMessage = <any>error
-		// 		);
-  // }
-
-  // getExperts() {
-  // 	this.expertsService.getExperts()
-		// 		.subscribe(
-		// 			experts => {
-		// 				console.log('Experts returned:', experts);
-		// 				this.experts = <Expert[]>experts
-		// 			},
-		// 			error =>  this.errorMessage = <any>error
-		// 		);
-  // }
+  getIndustries() {
+  	this.expertsService.getIndustries()
+				.subscribe(
+					filters => {
+						console.log('Filters returned:', filters);
+						this.filters = <Industry[]>filters
+					},
+					error =>  this.errorMessage = <any>error
+				);
+  }
 }

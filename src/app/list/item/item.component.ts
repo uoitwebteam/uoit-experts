@@ -16,15 +16,15 @@ import { Expert } from '../../models';
 export class ItemComponent implements OnInit {
 
 	@Input() expert: Expert;
-  @Output() onShowDetail = new EventEmitter<string>();
+  @Output() onShowDetail = new EventEmitter<Expert>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  showDetail(expertId: string) {
-    this.onShowDetail.emit(expertId);
+  showDetail(expert: Expert) {
+    this.onShowDetail.emit(expert);
   }
 
 }

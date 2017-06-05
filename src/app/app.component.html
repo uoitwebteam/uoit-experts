@@ -1,12 +1,29 @@
-<h1>
-  {{title}}
-</h1>
-<h2 *ngIf="errorMessage" style="color:red;">ERROR: {{ errorMessage }}</h2>
+<section class="row">
+	<div class="column">
+		<h1>
+		  {{title}}
+		</h1>
+		<h2 *ngIf="errorMessage" style="color:red;">ERROR: {{ errorMessage }}</h2>
 
-<expert-list></expert-list>
+		<div class="row">
+			<div class="column">
+				<label>Filter
+					<select>
+					  <option *ngFor="let filter of filters" [value]="filter.id">
+					    {{ filter.name }} <strong>({{ filter.count }})</strong>
+					  </option>
+					</select>
+				</label>
+			</div>
+			<div class="column">
+				<label>Sort<br/>
+					<button class="button hollow tiny">thing</button>
+					<button class="button hollow tiny">stuff</button>
+					<button class="button hollow tiny">doo</button>
+				</label>
+			</div>
+		</div>
 
-<ul>
-  <li *ngFor="let filter of filters">
-    {{ filter.id }}: {{ filter.name }} <strong>({{ filter.count }})</strong>
-  </li>
-</ul>
+		<expert-list></expert-list><!-- [experts]="experts" -->
+	</div>
+</section>

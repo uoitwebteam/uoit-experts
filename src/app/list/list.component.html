@@ -1,9 +1,6 @@
-<p>
-  list works!
-</p>
-<expert-profile *ngIf="expert" [expert]="expert"></expert-profile>
-<ul>
+<ul [hidden]="expert" class="no-bullet">
 	<li *ngFor="let expert of experts">
 	  <expert-list-item [expert]="expert" (onShowDetail)="onShowDetail($event)"></expert-list-item>
   </li>
 </ul>
+<expert-profile *ngIf="expert" [expert]="expert"></expert-profile>
