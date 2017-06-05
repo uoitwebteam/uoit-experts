@@ -1,5 +1,201 @@
-<p>
-  profile works!
-</p>
-<pre>{{ expert | json }}</pre>
-<img [src]="expert?.avatar.c.url" [height]="expert?.avatar.c.height" [width]="expert?.avatar.c.width">
+<section class="row">
+	<!-- ****************************
+	*
+	* HERO PANEL
+	*
+	***************************** -->
+  <article class="small-12 columns" role="banner">
+
+		<div class="row">
+	    <div class="small-4 medium-3 columns">
+	      <img class="expert_avatar_inner" src="{{ expert.avatar?.l.url }}" alt="Portrait of {{ expert.user.firstname }} {{ expert.user.lastname }}" />
+	    </div>
+
+	    <div class="small-8 medium-9 columns"> 
+	      <h2>
+		      <strong>{{ expert.user.firstname }} {{ expert.user.lastname }}<br/>
+			      <small>
+			      	{{ expert.user?.job_title }}
+			      	<span [hidden]="!expert.user?.location.city"> | {{ expert.user?.location.city }},</span>
+			      	<span [hidden]="!expert.user?.location.state">{{ expert.user?.location.state }},</span>
+			      	<span [hidden]="!expert.user?.location.country">{{ expert.user?.location.country !== 'CA' ? expert.user.location.country : 'CAN' }}</span>
+			      </small>
+			    </strong>
+			  </h2>
+
+	      <p [hidden]="!expert.tagline" class="lead">
+	        {{ expert.tagline }}
+	      </p>
+
+	      <p [hidden]="!expert.languages.length">
+	        <em>Languages spoken:</em>
+	        <span class="label" *ngFor="let language of expert.languages">{{ language.name }}</span>
+	      </p>
+      </div>
+			
+			<div class="small-12 columns"><hr/></div>
+
+      <div class="small-12 columns row align-justify align-middle" *ngIf="expert.engagement">
+				<div class="small-12 columns" [hidden]="!expert.engagement.availability_text.length">
+					<a href="//expertfile.com/experts/inquire/{{ expert.user?.username }}" target="new" class="button"><span class="fa fa-envelope"></span> Inquire</a>
+	        Availability:
+	        <a href="?a={{ avail }}" class="label" *ngFor="let avail of expert.engagement.availability_text">{{ avail }}</a>
+	      </div>
+
+        <div class="columns" [hidden]="!expert.engagement.topics.length">
+          <h3>Research Topics ({{ expert.engagement.topics.length }})</h3>
+          <p>
+            <a href="?q={{ topic.name }}" class="label" *ngFor="let topic of expert.engagement.topics">{{ topic.name }}</a>
+          </p>
+        </div>
+
+        <div class="columns" [hidden]="!expert.industry_expertise.length">
+          <h3>Industry Expertise ({{ expert.industry_expertise.length }})</h3>
+          <p>
+            <a href="?i={{ expertise.industry_id }}" class="label" *ngFor="let expertise of expert.industry_expertise">{{ expertise.industry }}</a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="social_links" [hidden]="!expert.socialprofile">
+      <a *ngFor="let network of expert.socialprofile | keys" [hidden]="(expert.socialprofile[network] === '')" title="Follow {{ expert.user.firstname }} {{ expert.user.lastname }} on {{ network | ucfirst }}" [href]="expert.socialprofile[network]" [class]="network">
+        <span class="fa fa-{{ network }}-square"></span>
+        <span class="show-for-sr">Follow {{ expert.user.firstname }} {{ expert.user.lastname }} on {{ network | ucfirst }}</span>
+      </a>
+    </div>
+  </article>
+
+	<article class="small-12 columns">
+		<div class="row">
+      <aside class="small-12 columns" id="media-gallery-filters">
+	      <ul class="menu filter-list">
+	        <li class="filter-list-title">Viewing:</li>
+	        <li><a class="media-filter" href="javascript:;">All</a></li>
+	        <li *ngFor="let media of expert | pick: 'photos':'videos':'documents':'audios':'books' | keys"><a class="media-filter" href="javascript:;">{{ media | ucfirst }}</a></li>
+		    </ul>
+	    </aside>
+  	</div>
+  </article>
+</section>
+<section class="row">
+  	<!-- ****************************
+		*
+		* BIO PANEL AND INDEX
+		*
+		***************************** -->
+		  <article class="medium-7 large-8 columns">
+		    <h3>Biography</h3>
+		    <p>{{ expert.description }}</p>
+		  </article>
+
+		  <article class="medium-5 large-4 columns callout">
+		    <h3>Related</h3>
+		    <hr/>
+		    <div [hidden]="!(expert.user.job_title | test: '(((faculty|office) of)\ )?(business|education|energy systems|engineering|health|(social\ )?science|graduate){1}(\ and\ )?(information technology|it|nuclear|applied|humanities|postdoctoral)?(\ science|\ studie)?s?':'ig')">
+		      <p class="faculty_link">
+		      	<small>Visit the</small><br/>
+			      <a href="http://socialscienceandhumanities.uoit.ca/" class="fssh">
+			      	{{ expert.user.job_title | match: '(((faculty|office) of)\ )?(business|education|energy systems|engineering|health|(social\ )?science|graduate){1}(\ and\ )?(information technology|it|nuclear|applied|humanities|postdoctoral)?(\ science|\ studie)?s?':'ig' }}
+			      	<span class="fa fa-external-link" aria-hidden="true"></span>
+			      </a>
+		      </p>
+	      </div>
+		  </article>
+
+</section>
+
+
+<!-- ****************************
+*
+* TWITTER FEED
+*
+***************************** -->
+<section class="row">
+  <article class="medium-4 large-3 columns" *ngIf="(expert.socialprofile.twitter !== '')">
+    <div id="activity">
+      <h3>Tweets <small>from <a [href]="expert.socialprofile.twitter" target="new" title="View {{ expert.socialprofile.twitter | match: '(?:https://twitter.com/).+':'ig' }} on twitter.com">{{ expert.socialprofile.twitter | match: '(?:https://twitter.com/).+':'ig' }}</a></small></h3>
+      <hr/>
+      <div class="twitter_feed">
+          
+            <div class="row tweet">
+              <div class="small-2 columns">
+                <a href="#" target="new">
+                  <img src="http://placehold.it/150x150" alt="" />
+                </a>
+              </div>
+              <div class="small-10 columns">
+                <p>
+                  This is a tweet! Blah blah, 140 characters later... #yolo
+                  <br><small><em>February 1, 1979</em></small>
+                </p>
+              </div>
+            </div>
+
+        <div class="twitter-readmore"></div>                             
+      </div>
+      <div class="twitter_overlay">
+        
+      </div>   
+    </div>      
+  </article>
+
+	<!-- ****************************
+	*
+	* EXPERTISE TABS
+	*
+	***************************** -->
+  <article class="{{ expert.socialprofile.twitter !== ''  ? 'medium-8 large-9' : 'small-12' }} columns add_pad">
+
+    <h3>Expertise</h3>
+    <hr/>
+
+    <ul class="tabs" data-tab data-options="deep_linking:true" role="tablist">
+      <li class="tab-title" role="presentation" *ngFor="let expertise of expert | pick: 'accomplishments':'accreditations':'research_grants':'affiliations':'partnerships' | keys; let i = index;">
+      	<a href="#expertise_panel-{{i}}" role="tab" tabindex="0">{{ (expertise | match: '[^_]+':'g').join(' ') | ucfirst }} <span class="label badge">{{ expert[expertise].length }}</span></a>
+      </li>
+    </ul>
+    <div class="tabs-content">
+      <section role="tabpanel" aria-hidden="false" class="content" id="panel2-1">
+      </section>
+
+    <!--<?php if(count($expert->accomplishments) > 0): ?>
+      <section role="tabpanel" aria-hidden="false" class="content active" id="panel2-1">
+        <ul class="<?php echo (isset($tweets) || count($tweets) > 0) ? 'small-block-grid-1 medium-block-grid-2 large-block-grid-3' : 'small-block-grid-2 medium-block-grid-3 large-block-grid-4'; ?>" data-equalizer="accomps">
+        <?php foreach($expert->accomplishments as $key=>$value): ?>
+          <li>
+            <table class="fiche" data-equalizer-watch="accomps">
+              <thead>
+                <tr>
+                  <th><span class="fa fa-trophy"></span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><h4><?php echo $value->title; ?></h4></td>
+                </tr>
+                <tr>
+                  <td class="date">
+                    <?php 
+                      if ($value->start != $value->end) {
+                        echo date("F j, Y", $value->start).' - '.date("F j, Y", $value->end);
+                      } else {
+                        echo date("F j, Y", $value->start);
+                      } 
+                    ?></td>
+                </tr>
+                <tr>
+                  <td><?php echo $value->description; ?></td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+          <?php endforeach ?>
+        </ul>
+      </section>
+    <?php endif ?>-->
+    </div>
+  </article>
+</section>
+
