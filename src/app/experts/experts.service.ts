@@ -41,7 +41,7 @@ export class ExpertsService {
   	return this.getAccessToken()
 			.flatMap((options: RequestOptions) => {
 		  	const search = new SearchQuery({
-		  		fields: 'user:username,user:firstname,user:lastname,user:job_title,tagline,user:location:city,avatar:l:url,user:location:state,user:location:country,engagement:topics'
+		  		fields: 'user:username,user:firstname,user:lastname,user:job_title,tagline,user:location:city,avatar:l:url,user:location:state,user:location:country,engagement:topics,industry_expertise'
 		  	});
 		    for (var key in search) {
 					options.params.set(key, search[key]);
@@ -116,7 +116,7 @@ export class ExpertsService {
   private mapIndustries(data): Industry[] {
 		console.log('Filters retrieved:', data);
 		return data.filters.industries
-			.map(({ industry_id, industry_name, count }) => new Industry(industry_id, industry_name, count))
-			.sort((a,b) => a.id - b.id);
+			.map(industry => new Industry(industry))
+			.sort((a,b) => a.industry_id - b.industry_id);
   }
 }

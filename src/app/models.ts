@@ -19,11 +19,14 @@ export interface Topic {
 }
 
 export class Industry {
-  constructor(
-    public id: number, 
-    public name: string, 
-    public count?: number
-  ) { }
+  public industry_id: number;
+  public industry_name: string;
+  public count?: number;
+  
+  constructor(industry: any) {
+  	const { industry_id, industry_name, count } = industry;
+  	Object.assign(this, { industry_id, industry_name, count });
+  }
 }
 
 export class Expert {
@@ -33,6 +36,7 @@ export class Expert {
 	public job_title: string;
 	public tagline: string;
 	public topics: Topic[];
+	public industry_expertise: Industry[];
 	public country: string;
 	public state: string;
 	public city: string;
