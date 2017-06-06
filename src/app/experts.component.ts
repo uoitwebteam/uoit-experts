@@ -5,11 +5,11 @@ import { ExpertsService } from './experts/experts.service';
 import { Industry, Expert, SearchQuery } from './models';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'expert-centre',
+  templateUrl: './experts.component.html',
+  styleUrls: ['./experts.component.css']
 })
-export class AppComponent {
+export class ExpertsComponent {
   title = 'app works!';
   errorMessage = null;
 

@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { NgPipesModule } from 'ngx-pipes';
 
-import { AppComponent } from './app.component';
+import { ExpertsComponent } from './experts.component';
 import { ExpertsService } from './experts/experts.service';
 import { ProfileComponent } from './profile/profile.component';
 import { ListComponent } from './list/list.component';
@@ -13,7 +13,7 @@ import { ItemComponent } from './list/item/item.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    ExpertsComponent,
     ProfileComponent,
     ListComponent,
     ItemComponent
@@ -27,6 +27,6 @@ import { ItemComponent } from './list/item/item.component';
   providers: [
   	ExpertsService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [ExpertsComponent]
 })
-export class AppModule { }
+export class ExpertsModule { }
