@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import 'rxjs/add/operator/retry';
 
 import { ExpertsService } from '../experts/experts.service';
-import { Industry, Expert } from '../models';
+import { Expert } from '../models';
 
 @Component({
   selector: 'expert-list',

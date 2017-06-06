@@ -11,13 +11,15 @@ import { ExpertsService } from './experts/experts.service';
 import { ProfileComponent } from './profile/profile.component';
 import { ListComponent } from './list/list.component';
 import { ItemComponent } from './list/item/item.component';
+import { FilterControlsComponent } from './filter-controls/filter-controls.component';
 
 @NgModule({
   declarations: [
     ExpertsComponent,
     ProfileComponent,
     ListComponent,
-    ItemComponent
+    ItemComponent,
+    FilterControlsComponent,
   ],
   imports: [
     BrowserModule,
