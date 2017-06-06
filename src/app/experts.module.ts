@@ -1,9 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { NgPipesModule } from 'ngx-pipes';
+import { Ng2CompleterModule } from 'ng2-completer';
 
 import { ExpertsComponent } from './experts.component';
 import { ExpertsService } from './experts/experts.service';
@@ -22,7 +23,8 @@ import { ItemComponent } from './list/item/item.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    NgPipesModule
+    NgPipesModule,
+    Ng2CompleterModule
   ],
   providers: [
   	ExpertsService
