@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
-import { ExpertsService } from './experts/experts.service';
+import { CompleterService, CompleterData } from 'ng2-completer';
 
+import { ExpertsService } from './experts/experts.service';
 import { Industry, Expert, SearchQuery } from './models';
 
 @Component({
@@ -10,25 +11,45 @@ import { Industry, Expert, SearchQuery } from './models';
   styleUrls: ['./experts.component.css']
 })
 export class ExpertsComponent {
-  title = 'app works!';
-  errorMessage = null;
-
-  filters = null;
+  industries = null;
   experts = null;
   expert = null;
 
-  constructor(private expertsService: ExpertsService) {
+  industriesSelected = [];
+
+  errorMessage = null;
+
+  protected dataService: CompleterData;
+
+  constructor(
+  	private expertsService: ExpertsService,
+  	private completerService: CompleterService
+  ) {
   	this.getIndustries();
   }
 
   getIndustries() {
   	this.expertsService.getIndustries()
 				.subscribe(
-					filters => {
-						console.log('Filters returned:', filters);
-						this.filters = <Industry[]>filters
+					industries => {
+						console.log('Filters returned:', industries);
+						this.industries = this.completerService.local(<Industry[]>industries, 'industry_name', 'industry_name');
 					},
 					error =>  this.errorMessage = <any>error
 				);
+  }
+
+  onIndustrySelected(industry) {
+  	if (industry) {
+	  	const { originalObject } = industry;
+	  	console.log({ originalObject });
+	  	const industryIndex = this.industriesSelected.indexOf(originalObject);
+	  	if (industryIndex === -1) {
+	  		this.industriesSelected.push(originalObject);
+	  	} else {
+	  		this.industriesSelected.splice(industryIndex, 1);
+	  	}
+	  	console.log(this.industriesSelected);
+	  }
   }
 }

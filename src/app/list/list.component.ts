@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import 'rxjs/add/operator/retry';
 
@@ -11,6 +11,9 @@ import { Industry, Expert } from '../models';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
+	@Input() filterBy: any;
+	@Input() orderBy: any;
+	@Input() searchBy: string;
 
 	experts: Expert[];
 	expert: Expert;

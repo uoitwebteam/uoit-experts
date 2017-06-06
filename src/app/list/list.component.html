@@ -1,5 +1,5 @@
 <ul [hidden]="expert" class="no-bullet">
-	<li *ngFor="let expert of experts">
+	<li *ngFor="let expert of experts | filterBy:['industry_expertise.industry_name']:filterBy">
 	  <expert-list-item [expert]="expert" (onShowDetail)="onShowDetail($event)"></expert-list-item>
   </li>
 </ul>
