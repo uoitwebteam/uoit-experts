@@ -12,6 +12,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ListComponent } from './list/list.component';
 import { ItemComponent } from './list/item/item.component';
 import { FilterControlsComponent } from './filter-controls/filter-controls.component';
+import { SortControlsComponent } from './sort-controls/sort-controls.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { FilterControlsComponent } from './filter-controls/filter-controls.compo
     ListComponent,
     ItemComponent,
     FilterControlsComponent,
+    SortControlsComponent,
   ],
   imports: [
     BrowserModule,
