@@ -1,6 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+// import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/mergeMap';
+// import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
 
 import { ExpertsService } from '../experts/experts.service';
@@ -12,40 +17,31 @@ import { Expert } from '../models';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
+	
 	@Input() filterBy: any;
 	@Input() orderBy: any;
 	@Input() searchBy: string;
 
-	experts: Observable<Expert[]>;
-	expert: Expert;
-  errorMessage;
+	public experts$: Observable<Expert[]> = this.expertsService
+		.getExperts()
+	  .retry(5);
+
+	public expert$: Observable<Expert> = new Subject<any>()
+		.map(expert => expert.username)
+		.flatMap(username => this.expertsService.getExpert(username))
+  	.retry(5);
+
+  public expert: any;
+
+  protected errorMessage;
 
   constructor(private expertsService: ExpertsService) { }
 
   ngOnInit() {
-  	this.getExperts();
-  }
-
-  onShowDetail(expert) {
-  	console.log('Expert detail opened for: ', expert.username);
-  	this.getExpert(expert);
-  }
-
-  getExperts() {
-  	this.experts = this.expertsService
-  		.getExperts()
-		  .retry(5)
-  }
-
-  getExpert(expert) {
-  	this.expertsService.getExpert(expert.username)
-		  	.retry(5)
-				.subscribe(
-					expert => {
-						console.log('Expert returned:', expert);
-						this.expert = expert;
-					},
-					error =>  this.errorMessage = <any>error
-				);
+		this.expert$.subscribe(
+			expert => {
+				console.log('Expert returned:', expert);
+				this.expert = expert;
+			});
   }
 }

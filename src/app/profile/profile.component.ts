@@ -1,11 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+	Component,
+	ChangeDetectionStrategy,
+	Input,
+	OnInit
+} from '@angular/core';
 
 import { Expert } from '../models';
 
 @Component({
   selector: 'expert-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileComponent implements OnInit {
 

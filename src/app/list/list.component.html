@@ -1,6 +1,6 @@
 <ul [hidden]="expert" class="no-bullet">
-	<li *ngFor="let expert of experts | async | filterBy:['firstname','lastname']:searchBy">
-	  <expert-list-item [expert]="expert" (onShowDetail)="onShowDetail($event)"></expert-list-item>
+	<li *ngFor="let expert of experts$ | async | filterBy:['firstname','lastname']:searchBy">
+	  <expert-list-item [expert]="expert" (onShowDetail)="expert$.next($event)"></expert-list-item>
   </li>
 </ul>
 <expert-profile *ngIf="expert" [expert]="expert"></expert-profile>
