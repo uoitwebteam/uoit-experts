@@ -5,29 +5,18 @@
 
 		<div class="row">
 			<div class="column">
-				<label>Filter by industry
-					<ng2-completer [(ngModel)]="industry"
-												 [datasource]="industries"
-												 (selected)="onIndustrySelected($event)"
-												 minSearchLength="0"
-												 clearSelected="true"
-												 openOnFocus="true"
-												 placeholder="E.g. &ldquo;Accounting&rdquo;">
-					</ng2-completer>
-					<div>
-						<span class="label" *ngFor="let industry of industriesSelected">&times; {{ industry.industry_name }}</span>
-					</div>
+				<expert-filter-controls (onFilterChanged)="onFilterChanged($event)"></expert-filter-controls>
+			</div>
+			<div class="column">
+				<label>Search by name<br/>
+					<input type="text" [(ngModel)]="search">
 				</label>
 			</div>
 			<div class="column">
-				<label>Sort<br/>
-					<button class="button hollow tiny">thing</button>
-					<button class="button hollow tiny">stuff</button>
-					<button class="button hollow tiny">doo</button>
-				</label>
+				<expert-sort-controls></expert-sort-controls>
 			</div>
 		</div>
 		<hr/>
-		<expert-list [filterBy]="industriesSelected"></expert-list><!-- [experts]="experts" -->
+		<expert-list [filterBy]="filter" [searchBy]="search"></expert-list><!-- [experts]="experts" -->
 	</div>
 </section>

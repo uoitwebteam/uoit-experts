@@ -1,0 +1,15 @@
+<div>
+	<label>Filter by industry
+		<ng2-completer [(ngModel)]="industry"
+									 [datasource]="industries"
+									 (selected)="onIndustrySelected($event)"
+									 minSearchLength="0"
+									 clearSelected="true"
+									 openOnFocus="true"
+									 placeholder="E.g. &ldquo;Accounting&rdquo;">
+		</ng2-completer>
+	</label>
+	<span class="label" *ngFor="let industry of industriesSelected">
+		<button (click)="toggleIndustry(industry)">&times;</button> {{ industry.industry_name }}
+	</span>
+</div>

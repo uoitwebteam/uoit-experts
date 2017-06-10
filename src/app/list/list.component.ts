@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/retry';
 
 import { ExpertsService } from '../experts/experts.service';
-import { Industry, Expert } from '../models';
+import { Expert } from '../models';
 
 @Component({
   selector: 'expert-list',
@@ -15,7 +16,7 @@ export class ListComponent implements OnInit {
 	@Input() orderBy: any;
 	@Input() searchBy: string;
 
-	experts: Expert[];
+	experts: Observable<Expert[]>;
 	expert: Expert;
   errorMessage;
 
@@ -31,15 +32,9 @@ export class ListComponent implements OnInit {
   }
 
   getExperts() {
-  	this.expertsService.getExperts()
-		  	.retry(5)
-				.subscribe(
-					experts => {
-						console.log('Experts returned:', experts);
-						this.experts = <Expert[]>experts
-					},
-					error =>  this.errorMessage = <any>error
-				);
+  	this.experts = this.expertsService
+  		.getExperts()
+		  .retry(5)
   }
 
   getExpert(expert) {
