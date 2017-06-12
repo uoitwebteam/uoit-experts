@@ -2,15 +2,17 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { Router } from '@angular/router';
 
 import { NgPipesModule } from 'ngx-pipes';
 import { Ng2CompleterModule } from 'ng2-completer';
 
 /**
- * Main component, service and router
+ * Main component, services and router
  */
 import { ExpertsComponent } from './experts.component';
 import { ExpertsService } from './experts/experts.service';
+import { ExpertProfileResolver } from './profile/profile-resolver.service';
 import { ExpertRouterModule } from './router/router.module';
 /**
  * Routed components
@@ -37,12 +39,18 @@ import { SortControlsComponent } from './sort-controls/sort-controls.component';
     HttpModule,
     NgPipesModule,
     Ng2CompleterModule,
-    // router
+    // router - ALWAYS LAST
     ExpertRouterModule,
   ],
   providers: [
-  	ExpertsService
+  	ExpertsService,
+  	ExpertProfileResolver
   ],
   bootstrap: [ExpertsComponent]
 })
-export class ExpertsModule { }
+export class ExpertsModule {
+  // Diagnostic only: inspect router configuration
+  constructor(router: Router) {
+    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+  }
+}

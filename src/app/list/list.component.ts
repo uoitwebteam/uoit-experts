@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -12,7 +13,6 @@ import { ExpertsService } from '../experts/experts.service';
 import { Expert } from '../models';
 
 @Component({
-  selector: 'expert-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
@@ -22,26 +22,22 @@ export class ExpertListComponent implements OnInit {
 	@Input() orderBy: any;
 	@Input() searchBy: string;
 
-	public experts$: Observable<Expert[]> = this.expertsService
+	public experts: Observable<Expert[]> = this.expertsService
 		.getExperts()
 	  .retry(5);
 
-	public expert$: Observable<Expert> = new Subject<any>()
-		.map(expert => expert.username)
-		.flatMap(username => this.expertsService.getExpert(username))
-  	.retry(5);
-
-  public expert: any;
-
   protected errorMessage;
 
-  constructor(private expertsService: ExpertsService) { }
+  constructor(
+  	private expertsService: ExpertsService,
+  	private router: Router,
+  	private route: ActivatedRoute,
+  ) { }
 
-  ngOnInit() {
-		this.expert$.subscribe(
-			expert => {
-				console.log('Expert returned:', expert);
-				this.expert = expert;
-			});
+  ngOnInit() { }
+
+  onShowDetail(expert: Expert) {
+  	console.log('Loading expert:', expert.username);
+    this.router.navigate([expert.username], { relativeTo: this.route });
   }
 }

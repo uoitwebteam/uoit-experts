@@ -1,25 +1,31 @@
-import {
-	Component,
-	ChangeDetectionStrategy,
-	Input,
-	OnInit
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Expert } from '../models';
 
 @Component({
-  selector: 'expert-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./profile.component.css']
 })
 export class ExpertProfileComponent implements OnInit {
 
-	@Input() expert: Expert;
+	expert: Expert;
 
-  constructor() { }
+	constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
+    this.route.data
+      .subscribe((data: { expert: Expert }) => {
+    		this.expert = data.expert
+    	});
+  }
+
+  backToExperts() {
+    const expertId = this.expert ? this.expert.username : null;
+    this.router.navigate(['../', { id: expertId }], { relativeTo: this.route });
   }
 
 }
