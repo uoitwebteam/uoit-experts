@@ -26,6 +26,24 @@ You can also use `ng generate directive|pipe|service|class|module` for other com
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build, or alternatively, use the `yarn build`/`npm run build` script (which includes it by default).
 
+### IMPORTANT: production
+
+Building the project executes a `prebuild` script located in the `scripts/` directory. The script is responsible for loading sensitive information from a `.env` file and injecting it into the app's `environment` variables, most notably the *ExpertFile* API credentials to be used with the built project. Until the `environment` is built, there will only be EJS templates in its place and the app **will not function correctly**.
+
+To use this project, you will need, from *Expertfile*:
+
+- an **organization ID**
+- a valid **API key**
+- the key's **API secret**
+
+...and the information will need to be loaded into a `.env` file on the project root in the format of:
+
+```
+API_ID=
+API_KEY=
+API_SECRET=
+```
+
 ## Running unit tests
 
 Run one of:
