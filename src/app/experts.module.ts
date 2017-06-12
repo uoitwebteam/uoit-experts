@@ -17,7 +17,7 @@ import { ExpertRouterModule } from './router/router.module';
  */
 import { ExpertProfileComponent } from './profile/profile.component';
 import { ExpertListComponent } from './list/list.component';
-import { ExpertListItemComponent } from './list/item/item.component';
+import { ExpertListItemComponent } from './list-item/list-item.component';
 /**
  * Sorting/filtering controls
  */

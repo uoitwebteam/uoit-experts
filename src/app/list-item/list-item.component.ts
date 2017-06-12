@@ -6,7 +6,7 @@ import {
 	OnInit
 } from '@angular/core';
 
-import { Expert } from '../../models';
+import { Expert } from '../models';
 
 @Component({
   selector: 'expert-list-item',
