@@ -1,29 +1,36 @@
+/**
+ * Angular
+ */
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Router } from '@angular/router';
 
+/**
+ * Community modules
+ */
 import { NgPipesModule } from 'ngx-pipes';
 import { Ng2CompleterModule } from 'ng2-completer';
 
 /**
- * Main component, services and router
+ * Application features
  */
+// - Main component
 import { ExpertsComponent } from './experts.component';
+// - Services and resolvers
 import { ExpertsService } from './experts/experts.service';
+import { ControlsService } from './controls/controls.service';
 import { ExpertProfileResolver } from './profile/profile-resolver.service';
+// - Router module
 import { ExpertRouterModule } from './router/router.module';
-/**
- * Routed components
- */
+// - Routed components
 import { ExpertProfileComponent } from './profile/profile.component';
 import { ExpertListComponent } from './list/list.component';
-/**
- * Sorting/filtering controls
- */
-import { FilterControlsComponent } from './filter-controls/filter-controls.component';
-import { SortControlsComponent } from './sort-controls/sort-controls.component';
+// - Static components
+import { FilterControlsComponent } from './controls/filter-controls.component';
+import { SortControlsComponent } from './controls/sort-controls.component';
+import { SearchControlsComponent } from './controls/search-controls.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +39,7 @@ import { SortControlsComponent } from './sort-controls/sort-controls.component';
     ExpertListComponent,
     FilterControlsComponent,
     SortControlsComponent,
+    SearchControlsComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +52,7 @@ import { SortControlsComponent } from './sort-controls/sort-controls.component';
   ],
   providers: [
   	ExpertsService,
+  	ControlsService,
   	ExpertProfileResolver
   ],
   bootstrap: [ExpertsComponent]

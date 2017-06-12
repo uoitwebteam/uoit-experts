@@ -8,9 +8,7 @@
 				<expert-filter-controls (onFilterChanged)="onFilterChanged($event)"></expert-filter-controls>
 			</div>
 			<div class="column">
-				<label>Search by name<br/>
-					<input type="text" [(ngModel)]="search">
-				</label>
+				<expert-search-controls></expert-search-controls>
 			</div>
 			<div class="column">
 				<expert-sort-controls></expert-sort-controls>

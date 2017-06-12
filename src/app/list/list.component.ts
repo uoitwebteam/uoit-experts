@@ -10,6 +10,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
 
 import { ExpertsService } from '../experts/experts.service';
+import { ControlsService } from '../controls/controls.service';
 import { Expert } from '../models';
 
 @Component({
@@ -18,7 +19,7 @@ import { Expert } from '../models';
 })
 export class ExpertListComponent implements OnInit {
 	
-	@Input() filterBy: any;
+	@Input() filterBy: any[];
 	@Input() orderBy: any;
 	@Input() searchBy: string;
 
@@ -30,11 +31,19 @@ export class ExpertListComponent implements OnInit {
 
   constructor(
   	private expertsService: ExpertsService,
+  	private controlsService: ControlsService,
   	private router: Router,
   	private route: ActivatedRoute,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+  	this.controlsService.filterControls$.subscribe(
+  		filters => {
+  			console.log('Filters selected:', filters);
+  			this.filterBy = filters;
+  		}
+  	);
+  }
 
   onShowDetail(expert: Expert) {
   	console.log('Loading expert:', expert.username);
