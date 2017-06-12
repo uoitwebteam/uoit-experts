@@ -9,6 +9,7 @@
     "prebuild": "./scripts/prebuild.js",
     "postinstall": "chmod +x ./scripts/*.js",
     "component": "ng generate component",
+    "module": "ng generate module",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -22,7 +23,7 @@
     "@angular/http": "^4.0.0",
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
-    "@angular/router": "^4.0.0",
+    "@angular/router": "^4.1.3",
     "core-js": "^2.4.1",
     "dotenv": "^4.0.0",
     "ng2-completer": "^1.4.0",
