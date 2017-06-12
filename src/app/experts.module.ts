@@ -8,18 +8,18 @@ import { Ng2CompleterModule } from 'ng2-completer';
 
 import { ExpertsComponent } from './experts.component';
 import { ExpertsService } from './experts/experts.service';
-import { ProfileComponent } from './profile/profile.component';
-import { ListComponent } from './list/list.component';
-import { ItemComponent } from './list/item/item.component';
+import { ExpertProfileComponent } from './profile/profile.component';
+import { ExpertListComponent } from './list/list.component';
+import { ExpertListItemComponent } from './list/item/item.component';
 import { FilterControlsComponent } from './filter-controls/filter-controls.component';
 import { SortControlsComponent } from './sort-controls/sort-controls.component';
 
 @NgModule({
   declarations: [
     ExpertsComponent,
-    ProfileComponent,
-    ListComponent,
-    ItemComponent,
+    ExpertProfileComponent,
+    ExpertListComponent,
+    ExpertListItemComponent,
     FilterControlsComponent,
     SortControlsComponent,
   ],

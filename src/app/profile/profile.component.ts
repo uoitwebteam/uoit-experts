@@ -13,7 +13,7 @@ import { Expert } from '../models';
   styleUrls: ['./profile.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileComponent implements OnInit {
+export class ExpertProfileComponent implements OnInit {
 
 	@Input() expert: Expert;
 

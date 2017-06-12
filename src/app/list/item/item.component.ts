@@ -13,7 +13,7 @@ import { Expert } from '../../models';
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.css']
 })
-export class ItemComponent implements OnInit {
+export class ExpertListItemComponent implements OnInit {
 
 	@Input() expert: Expert;
   @Output() onShowDetail = new EventEmitter<Expert>();
