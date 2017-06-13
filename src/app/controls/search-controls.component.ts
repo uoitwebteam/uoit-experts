@@ -23,9 +23,7 @@ export class SearchControlsComponent implements OnInit {
 
   onSearchTyped(value) {
   	console.log('Search typed:', value);
-  	if (value && value !== '') {
-  		this.onSearchChanged.emit(value)
-  	}
+		this.onSearchChanged.emit(value)
   }
 
 }
