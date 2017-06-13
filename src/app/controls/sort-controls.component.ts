@@ -10,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SortControlsComponent implements OnInit {
 
+  @Output() onSortChanged = new EventEmitter<string>();
+  sort: any;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onSortSelected(value) {//event: Event) {
+  	// const { value } = <HTMLInputElement>event.target;
+  	console.log('Sort changed:', value);
+  	if (value && value !== '') {
+  		this.onSortChanged.emit(value);
+  		this.sort = value;
+  	}
   }
 
 }

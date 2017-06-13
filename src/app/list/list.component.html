@@ -1,6 +1,6 @@
 <router-outlet></router-outlet>
 <ul class="no-bullet">
-	<li *ngFor="let expert of experts | async | filterBy:['firstname','lastname']:searchBy">
+	<li *ngFor="let expert of experts | async | filterBy:['firstname','lastname']:searchBy | orderBy:orderBy">
 		<div class="media-object">
 			<div class="media-object-section align-self-center">
 			  <a href="javascript:;" (click)="onShowDetail(expert)" class="thumbnail">

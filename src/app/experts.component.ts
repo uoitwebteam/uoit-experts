@@ -25,6 +25,10 @@ export class ExpertsComponent {
   	this.controlsService.search(search);
   }
 
+  onSortChanged(sort: string) {
+  	this.controlsService.sort(sort);
+  }
+
   onFilterChanged(filter: Industry[]) {
   	this.controlsService.filter(filter);
   }
