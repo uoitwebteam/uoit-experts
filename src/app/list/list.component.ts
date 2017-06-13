@@ -38,6 +38,19 @@ export class ExpertListComponent implements OnInit {
   			this.filterBy = filters;
   		}
   	);
+  	this.controlsService.searchControls$.subscribe(
+  		search => {
+  			console.log('Query submitted:', search);
+  			this.searchBy = search;
+  		}
+  	);
+  	this.controlsService.sortControls$.subscribe(
+  		sort => {
+  			console.log('Results sorted by ' + sort);
+  			this.orderBy = sort;
+  		}
+  	);
+  	
   }
 
   onShowDetail(expert: Expert) {

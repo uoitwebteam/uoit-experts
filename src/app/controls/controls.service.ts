@@ -11,7 +11,7 @@ export class ControlsService {
   private sortControlsSource = new Subject<string>();
   private filterControlsSource = new Subject<Industry[]>();
 
-  searchControls$ = this.sortControlsSource.asObservable();
+  searchControls$ = this.searchControlsSource.asObservable();
   sortControls$ = this.sortControlsSource.asObservable();
   filterControls$ = this.filterControlsSource.asObservable();
 
