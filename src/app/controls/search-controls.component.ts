@@ -8,7 +8,7 @@ import {
 @Component({
   selector: 'expert-search-controls',
   template: `<label>Search by name<br/>
-		<input type="text" [value]="search" (input)="onSearchTyped($event)">
+		<input #input type="text" [value]="search" (input)="onSearchTyped(input.value)">
 	</label>`
 })
 export class SearchControlsComponent implements OnInit {
@@ -21,8 +21,7 @@ export class SearchControlsComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSearchTyped(event: Event) {
-  	const { value } = <HTMLInputElement>event.target;
+  onSearchTyped(value) {
   	console.log('Search typed:', value);
   	if (value && value !== '') {
   		this.onSearchChanged.emit(value)

@@ -1,11 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import {
+	Component,
+	Output,
+	EventEmitter,
+	OnInit
+} from '@angular/core';
 
 @Component({
   selector: 'expert-sort-controls',
-  template: `<label>Sort by<br/>
-		<button class="button hollow tiny">First name</button>
-		<button class="button hollow tiny">Last name</button>
-		<button class="button hollow tiny">doo</button>
+  template: `<label>Sort by
+  	<div class="button-group tiny">
+			<button class="button" (click)="onSortSelected('firstname')" [ngClass]="{ hollow: !(sort === 'firstname') }">
+				First name
+			</button>
+			<button class="button" (click)="onSortSelected('lastname')" [ngClass]="{ hollow: !(sort === 'lastname') }">
+				Last name
+			</button>
+			<button class="button" (click)="onSortSelected('job_title')" [ngClass]="{ hollow: !(sort === 'job_title') }">
+				Title
+			</button>
+			<button class="button" (click)="onSortSelected('city')" [ngClass]="{ hollow: !(sort === 'city') }">
+				City
+			</button>
+		</div>
 	</label>`
 })
 export class SortControlsComponent implements OnInit {
@@ -18,8 +34,7 @@ export class SortControlsComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSortSelected(value) {//event: Event) {
-  	// const { value } = <HTMLInputElement>event.target;
+  onSortSelected(value) {
   	console.log('Sort changed:', value);
   	if (value && value !== '') {
   		this.onSortChanged.emit(value);
