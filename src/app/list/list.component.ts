@@ -3,11 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-// import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/mergeMap';
-// import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/retry';
 
 import { ExpertsService } from '../experts/experts.service';
 import { ControlsService } from '../controls/controls.service';
