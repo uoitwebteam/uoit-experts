@@ -1,51 +1,60 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/retry';
+import { Subject } from 'rxjs/Subject';
 
 import { ExpertsService } from '../experts/experts.service';
+import { ControlsService } from '../controls/controls.service';
 import { Expert } from '../models';
 
 @Component({
-  selector: 'expert-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent implements OnInit {
-	@Input() filterBy: any;
+export class ExpertListComponent implements OnInit {
+	
+	@Input() filterBy: any[];
 	@Input() orderBy: any;
 	@Input() searchBy: string;
 
-	experts: Observable<Expert[]>;
-	expert: Expert;
-  errorMessage;
+	public experts: Observable<Expert[]> = this.expertsService
+		.getExperts()
+	  .retry(5);
 
-  constructor(private expertsService: ExpertsService) { }
+  protected errorMessage;
+
+  constructor(
+  	private expertsService: ExpertsService,
+  	private controlsService: ControlsService,
+  	private router: Router,
+  	private route: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
-  	this.getExperts();
+  	this.controlsService.filterControls$.subscribe(
+  		filters => {
+  			console.log('Filters selected:', filters);
+  			this.filterBy = filters;
+  		}
+  	);
+  	this.controlsService.searchControls$.subscribe(
+  		search => {
+  			console.log('Query submitted:', search);
+  			this.searchBy = search;
+  		}
+  	);
+  	this.controlsService.sortControls$.subscribe(
+  		sort => {
+  			console.log('Results sorted by ' + sort);
+  			this.orderBy = sort;
+  		}
+  	);
+  	
   }
 
-  onShowDetail(expert) {
-  	console.log('Expert detail opened for: ', expert.username);
-  	this.getExpert(expert);
-  }
-
-  getExperts() {
-  	this.experts = this.expertsService
-  		.getExperts()
-		  .retry(5)
-  }
-
-  getExpert(expert) {
-  	this.expertsService.getExpert(expert.username)
-		  	.retry(5)
-				.subscribe(
-					expert => {
-						console.log('Expert returned:', expert);
-						this.expert = expert;
-					},
-					error =>  this.errorMessage = <any>error
-				);
+  onShowDetail(expert: Expert) {
+  	console.log('Loading expert:', expert.username);
+    this.router.navigate([expert.username], { relativeTo: this.route });
   }
 }

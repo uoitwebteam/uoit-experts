@@ -1,38 +1,65 @@
+/**
+ * Angular
+ */
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { Router } from '@angular/router';
 
+/**
+ * Community modules
+ */
 import { NgPipesModule } from 'ngx-pipes';
 import { Ng2CompleterModule } from 'ng2-completer';
 
+/**
+ * Application features
+ */
+// - Main component
 import { ExpertsComponent } from './experts.component';
+// - Services and resolvers
 import { ExpertsService } from './experts/experts.service';
-import { ProfileComponent } from './profile/profile.component';
-import { ListComponent } from './list/list.component';
-import { ItemComponent } from './list/item/item.component';
-import { FilterControlsComponent } from './filter-controls/filter-controls.component';
-import { SortControlsComponent } from './sort-controls/sort-controls.component';
+import { ControlsService } from './controls/controls.service';
+import { ExpertProfileResolver } from './profile/profile-resolver.service';
+// - Router module
+import { ExpertRouterModule } from './router/router.module';
+// - Routed components
+import { ExpertProfileComponent } from './profile/profile.component';
+import { ExpertListComponent } from './list/list.component';
+// - Static components
+import { FilterControlsComponent } from './controls/filter-controls.component';
+import { SortControlsComponent } from './controls/sort-controls.component';
+import { SearchControlsComponent } from './controls/search-controls.component';
 
 @NgModule({
   declarations: [
     ExpertsComponent,
-    ProfileComponent,
-    ListComponent,
-    ItemComponent,
+    ExpertProfileComponent,
+    ExpertListComponent,
     FilterControlsComponent,
     SortControlsComponent,
+    SearchControlsComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     NgPipesModule,
-    Ng2CompleterModule
+    Ng2CompleterModule,
+    // router - ALWAYS LAST
+    ExpertRouterModule,
   ],
   providers: [
-  	ExpertsService
+  	ExpertsService,
+  	ControlsService,
+  	ExpertProfileResolver
   ],
   bootstrap: [ExpertsComponent]
 })
-export class ExpertsModule { }
+export class ExpertsModule {
+  // Diagnostic only: inspect router configuration
+  constructor(router: Router) {
+    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+  }
+}

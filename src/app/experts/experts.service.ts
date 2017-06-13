@@ -29,7 +29,7 @@ export class ExpertsService {
 
   getIndustries(): Observable<Industry[]> {
   	return this.getAccessToken()
-			.flatMap((options: RequestOptions) => {
+			.mergeMap((options: RequestOptions) => {
 				return this.http.get(`${this.apiUrl}/organization/${this.apiId}/getfilters`, options);
 			})
 			.map(this.extractData)
@@ -39,7 +39,7 @@ export class ExpertsService {
 
   getExperts(): Observable<Expert[]> {
   	return this.getAccessToken()
-			.flatMap((options: RequestOptions) => {
+			.mergeMap((options: RequestOptions) => {
 		  	const search = new SearchQuery({
 		  		fields: 'user:username,user:firstname,user:lastname,user:job_title,tagline,user:location:city,avatar:l:url,user:location:state,user:location:country,engagement:topics,industry_expertise'
 		  	});
@@ -56,7 +56,7 @@ export class ExpertsService {
 
   getExpert(id): Observable<Expert> {
   	return this.getAccessToken()
-			.flatMap((options: RequestOptions) => {
+			.mergeMap((options: RequestOptions) => {
 				console.log('Final query:', options);
 				return this.http.get(`${this.apiUrl}/organization/${this.apiId}/speaker/${id}`, options);
 			})

@@ -5,15 +5,33 @@ import {
 	OnInit
 } from '@angular/core';
 
-import { CompleterService, CompleterData, CtrCompleter } from 'ng2-completer';
+import {
+	CompleterService,
+	CompleterData,
+	CompleterItem,
+	CtrCompleter
+} from 'ng2-completer';
 
 import { ExpertsService } from '../experts/experts.service';
 import { Industry } from '../models';
 
 @Component({
   selector: 'expert-filter-controls',
-  templateUrl: './filter-controls.component.html',
-  styleUrls: ['./filter-controls.component.css']
+  template: `<div>
+		<label>Filter by industry
+			<ng2-completer [(ngModel)]="industry"
+										 [datasource]="industries"
+										 (selected)="onIndustrySelected($event)"
+										 minSearchLength="0"
+										 clearSelected="true"
+										 openOnFocus="true"
+										 placeholder="E.g. &ldquo;Accounting&rdquo;">
+			</ng2-completer>
+		</label>
+		<span class="label" *ngFor="let industry of industriesSelected">
+			<button (click)="toggleIndustry(industry)">&times;</button> {{ industry.industry_name }}
+		</span>
+	</div>`
 })
 export class FilterControlsComponent implements OnInit {
 
@@ -44,7 +62,7 @@ export class FilterControlsComponent implements OnInit {
 				);
   }
 
-  toggleIndustry(industry) {
+  toggleIndustry(industry: Industry) {
   	const industryIndex = this.industriesSelected.indexOf(industry);
   	if (industryIndex === -1) {
   		this.industriesSelected.push(industry);
@@ -53,14 +71,13 @@ export class FilterControlsComponent implements OnInit {
   		this.industriesSelected.splice(industryIndex, 1);
 	  	console.log('Filter removed:', industry);
   	}
+    this.onFilterChanged.emit(this.industriesSelected);
   }
 
-  onIndustrySelected(industry) {
+  onIndustrySelected(industry: CompleterItem) {
   	if (industry) {
 	  	const { originalObject } = industry;
 		  this.toggleIndustry(originalObject);
-	    this.onFilterChanged.emit(this.industriesSelected);
-	  	console.log('Filters selected:', this.industriesSelected);
 	  }
   }
 
