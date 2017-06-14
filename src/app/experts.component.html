@@ -2,18 +2,7 @@
 	<div class="column">
 		<h1>Expert Centre</h1>
 		<h2 *ngIf="errorMessage" style="color:red;">ERROR: {{ errorMessage }}</h2>
-
-		<div class="row">
-			<div class="column">
-				<expert-filter-controls (onFilterChanged)="onFilterChanged($event)"></expert-filter-controls>
-			</div>
-			<div class="column">
-				<expert-search-controls (onSearchChanged)="onSearchChanged($event)"></expert-search-controls>
-			</div>
-			<div class="column">
-				<expert-sort-controls (onSortChanged)="onSortChanged($event)"></expert-sort-controls>
-			</div>
-		</div>
+		<expert-controls></expert-controls>
 		<hr/>
 		<router-outlet></router-outlet>
 	</div>
