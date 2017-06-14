@@ -19,8 +19,7 @@ import { Industry } from '../models';
   selector: 'expert-filter-controls',
   template: `<div>
 		<label>Filter by industry
-			<ng2-completer [(ngModel)]="industry"
-										 [datasource]="industries"
+			<ng2-completer [datasource]="industries"
 										 (selected)="onIndustrySelected($event)"
 										 minSearchLength="0"
 										 clearSelected="true"
@@ -37,7 +36,11 @@ export class FilterControlsComponent implements OnInit {
 
   @Output() onFilterChanged = new EventEmitter<Industry[]>();
 
-  protected industries: CompleterData;
+  protected industries: CompleterData = this.completerService.local(
+  	this.expertsService.getIndustries(),
+  	'industry_name',
+  	'industry_name'
+  );
   protected industriesSelected: Industry[] = [];
 
   errorMessage = null;
@@ -47,20 +50,7 @@ export class FilterControlsComponent implements OnInit {
   	private completerService: CompleterService
   ) { }
 
-  ngOnInit() {
-  	this.getIndustries();
-  }
-
-  getIndustries() {
-  	this.expertsService.getIndustries()
-				.subscribe(
-					industries => {
-						console.log('Filters returned:', industries);
-						this.industries = this.completerService.local(<Industry[]>industries, 'industry_name', 'industry_name');
-					},
-					error =>  this.errorMessage = <any>error
-				);
-  }
+  ngOnInit() { }
 
   toggleIndustry(industry: Industry) {
   	const industryIndex = this.industriesSelected.indexOf(industry);
