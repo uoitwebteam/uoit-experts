@@ -5,8 +5,7 @@ import { Industry } from './models';
 
 @Component({
   selector: 'expert-centre',
-  templateUrl: './experts.component.html',
-  styleUrls: ['./experts.component.css']
+  templateUrl: './experts.component.html'
 })
 export class ExpertsComponent {
   industries = null;
