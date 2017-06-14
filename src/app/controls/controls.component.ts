@@ -2,14 +2,14 @@ import {
 	Component,
 	OnInit
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 import { ControlsService } from './controls.service';
 import { Industry } from '../models';
 
 @Component({
   selector: 'expert-controls',
-  template: `<div class="row">
+  template: `<form class="row" [formGroup]="controlsForm">
 		<div class="column">
 			<expert-filter-controls formControlName="filter" (onFilterChanged)="onFilterChanged($event)"></expert-filter-controls>
 		</div>
@@ -19,13 +19,16 @@ import { Industry } from '../models';
 		<div class="column">
 			<expert-sort-controls (onSortChanged)="onSortChanged($event)"></expert-sort-controls>
 		</div>
-	</div>`
+		<pre>{{ controlsForm.value | json }}</pre>
+	</form>`
 })
 export class ControlsComponent implements OnInit {
 
-	filter = new FormControl();
-	search = new FormControl();
-	sort = new FormControl();
+  protected controlsForm = new FormGroup({
+		filter: new FormControl(),
+		search: new FormControl(),
+		sort: new FormControl(),
+  });
 
   constructor(
   	private controlsService: ControlsService
