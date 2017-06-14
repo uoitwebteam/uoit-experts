@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { Ng2CompleterModule } from 'ng2-completer';
 
@@ -14,6 +14,7 @@ import { ControlsService } from './controls.service';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     Ng2CompleterModule,
   ],
   declarations: [
