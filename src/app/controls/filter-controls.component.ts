@@ -1,9 +1,12 @@
 import {
 	Component,
+	Input,
 	Output,
 	EventEmitter,
-	OnInit
+	OnInit,
+	forwardRef
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import {
 	CompleterService,
@@ -30,18 +33,28 @@ import { Industry } from '../models';
 		<span class="label" *ngFor="let industry of industriesSelected">
 			<button (click)="toggleIndustry(industry)">&times;</button> {{ industry.industry_name }}
 		</span>
-	</div>`
+	</div>`,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => FilterControlsComponent),
+      multi: true
+    }
+  ]
 })
-export class FilterControlsComponent implements OnInit {
+export class FilterControlsComponent implements OnInit, ControlValueAccessor {
 
   @Output() onFilterChanged = new EventEmitter<Industry[]>();
+  @Input('value') industriesSelected: Industry[] = [];
+  // overwritten by registerOnChange() and registerOnTouched()
+  onChange: any = () => { };
+  onTouched: any = () => { };
 
   protected industries: CompleterData = this.completerService.local(
   	this.expertsService.getIndustries(),
   	'industry_name',
   	'industry_name'
   );
-  protected industriesSelected: Industry[] = [];
 
   errorMessage = null;
 
@@ -62,6 +75,7 @@ export class FilterControlsComponent implements OnInit {
 	  	console.log('Filter removed:', industry);
   	}
     this.onFilterChanged.emit(this.industriesSelected);
+    this.onChange(this.industriesSelected)
   }
 
   onIndustrySelected(industry: CompleterItem) {
@@ -71,4 +85,20 @@ export class FilterControlsComponent implements OnInit {
 	  }
   }
 
+  /**
+   * ControlValueAccessor interface
+   */
+  registerOnChange(fn) {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn) { 
+    this.onTouched = fn;
+  }
+
+	writeValue(value) {
+	  if (value) {
+	    this.industriesSelected = value;
+	  }
+	}
 }
